@@ -1,169 +1,262 @@
 @extends('layout.main')
 @section('content')
-    <div class="container-fluid">
-        <div class="row column_title">
+    <div class="page-inner">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+            <div>
+                <h3 class="fw-bold mb-3">Dashboard</h3>
+                <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+                <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+                <a href="#" class="btn btn-primary btn-round">Add Customer</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Visitors</p>
+                                    <h4 class="card-title">1,294</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-info bubble-shadow-small">
+                                    <i class="fas fa-user-check"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Subscribers</p>
+                                    <h4 class="card-title">1303</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="fas fa-luggage-cart"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Sales</p>
+                                    <h4 class="card-title">$ 1,345</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                                    <i class="far fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Order</p>
+                                    <h4 class="card-title">576</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-round">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">User Statistics</div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
+                                    <span class="btn-label">
+                                        <i class="fa fa-pencil"></i>
+                                    </span>
+                                    Export
+                                </a>
+                                <a href="#" class="btn btn-label-info btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="statisticsChart"></canvas>
+                        </div>
+                        <div id="myChartLegend"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-primary card-round">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Daily Sales</div>
+                            <div class="card-tools">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-label-light dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-category">March 25 - April 02</div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                            <h1>$4,578.58</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-round">
+                    <div class="card-body pb-0">
+                        <div class="h1 fw-bold float-end text-primary">+5%</div>
+                        <h2 class="mb-2">17</h2>
+                        <p class="text-muted">Users online</p>
+                        <div class="pull-in sparkline-fix">
+                            <div id="lineChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
-                <div class="page_title">
-                    <h2>Dashboard</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row column1">
-            <div class="col-md-6 col-lg-3">
-                <div class="full counter_section margin_bottom_30">
-                    <div class="couter_icon">
-                        <div>
-                            <i class="fa fa-user yellow_color"></i>
+                <div class="card card-round">
+                    <div class="card-header">
+                        <div class="card-head-row card-tools-still-right">
+                            <h4 class="card-title">Users Geolocation</h4>
+                            <div class="card-tools">
+                                <button class="btn btn-icon btn-link btn-primary btn-xs">
+                                    <span class="fa fa-angle-down"></span>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card">
+                                    <span class="fa fa-sync-alt"></span>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-primary btn-xs">
+                                    <span class="fa fa-times"></span>
+                                </button>
+                            </div>
                         </div>
+                        <p class="card-category">
+                            Map of the distribution of users around the world
+                        </p>
                     </div>
-                    <div class="counter_no">
-                        <div>
-                            <p class="total_no">2500</p>
-                            <p class="head_couter">Welcome</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full counter_section margin_bottom_30">
-                    <div class="couter_icon">
-                        <div>
-                            <i class="fa fa-clock-o blue1_color"></i>
-                        </div>
-                    </div>
-                    <div class="counter_no">
-                        <div>
-                            <p class="total_no">123.50</p>
-                            <p class="head_couter">Average Time</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full counter_section margin_bottom_30">
-                    <div class="couter_icon">
-                        <div>
-                            <i class="fa fa-cloud-download green_color"></i>
-                        </div>
-                    </div>
-                    <div class="counter_no">
-                        <div>
-                            <p class="total_no">1,805</p>
-                            <p class="head_couter">Collections</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full counter_section margin_bottom_30">
-                    <div class="couter_icon">
-                        <div>
-                            <i class="fa fa-comments-o red_color"></i>
-                        </div>
-                    </div>
-                    <div class="counter_no">
-                        <div>
-                            <p class="total_no">54</p>
-                            <p class="head_couter">Comments</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row column1 social_media_section">
-            <div class="col-md-6 col-lg-3">
-                <div class="full socile_icons fb margin_bottom_30">
-                    <div class="social_icon">
-                        <i class="fa fa-facebook"></i>
-                    </div>
-                    <div class="social_cont">
-                        <ul>
-                            <li>
-                                <span><strong>35k</strong></span>
-                                <span>Friends</span>
-                            </li>
-                            <li>
-                                <span><strong>128</strong></span>
-                                <span>Feeds</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full socile_icons tw margin_bottom_30">
-                    <div class="social_icon">
-                        <i class="fa fa-twitter"></i>
-                    </div>
-                    <div class="social_cont">
-                        <ul>
-                            <li>
-                                <span><strong>584k</strong></span>
-                                <span>Followers</span>
-                            </li>
-                            <li>
-                                <span><strong>978</strong></span>
-                                <span>Tweets</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full socile_icons linked margin_bottom_30">
-                    <div class="social_icon">
-                        <i class="fa fa-linkedin"></i>
-                    </div>
-                    <div class="social_cont">
-                        <ul>
-                            <li>
-                                <span><strong>758+</strong></span>
-                                <span>Contacts</span>
-                            </li>
-                            <li>
-                                <span><strong>365</strong></span>
-                                <span>Feeds</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="full socile_icons google_p margin_bottom_30">
-                    <div class="social_icon">
-                        <i class="fa fa-google-plus"></i>
-                    </div>
-                    <div class="social_cont">
-                        <ul>
-                            <li>
-                                <span><strong>450</strong></span>
-                                <span>Followers</span>
-                            </li>
-                            <li>
-                                <span><strong>57</strong></span>
-                                <span>Circles</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- graph -->
-        <div class="row column2 graph margin_bottom_30">
-            <div class="col-md-l2 col-lg-12">
-                <div class="white_shd full">
-                    <div class="full graph_head">
-                        <div class="heading1 margin_0">
-                            <h2>Extra Area Chart</h2>
-                        </div>
-                    </div>
-                    <div class="full graph_revenue">
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="content">
-                                    <div class="area_chart">
-                                        <canvas height="120" id="canvas"></canvas>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="table-responsive table-hover table-sales">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/id.png" alt="indonesia" />
+                                                    </div>
+                                                </td>
+                                                <td>Indonesia</td>
+                                                <td class="text-end">2.320</td>
+                                                <td class="text-end">42.18%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/us.png" alt="united states" />
+                                                    </div>
+                                                </td>
+                                                <td>USA</td>
+                                                <td class="text-end">240</td>
+                                                <td class="text-end">4.36%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/au.png" alt="australia" />
+                                                    </div>
+                                                </td>
+                                                <td>Australia</td>
+                                                <td class="text-end">119</td>
+                                                <td class="text-end">2.16%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/ru.png" alt="russia" />
+                                                    </div>
+                                                </td>
+                                                <td>Russia</td>
+                                                <td class="text-end">1.081</td>
+                                                <td class="text-end">19.65%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/cn.png" alt="china" />
+                                                    </div>
+                                                </td>
+                                                <td>China</td>
+                                                <td class="text-end">1.100</td>
+                                                <td class="text-end">20%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="assets/img/flags/br.png" alt="brazil" />
+                                                    </div>
+                                                </td>
+                                                <td>Brasil</td>
+                                                <td class="text-end">640</td>
+                                                <td class="text-end">11.63%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mapcontainer">
+                                    <div id="world-map" class="w-100" style="height: 300px"></div>
                                 </div>
                             </div>
                         </div>
@@ -171,217 +264,249 @@
                 </div>
             </div>
         </div>
-        <!-- end graph -->
-        <div class="row column3">
-            <!-- testimonial -->
-            <div class="col-md-6">
-                <div class="dark_bg full margin_bottom_30">
-                    <div class="full graph_head">
-                        <div class="heading1 margin_0">
-                            <h2>Testimonial</h2>
-                        </div>
-                    </div>
-                    <div class="full graph_revenue">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="content testimonial">
-                                    <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
-                                        <!-- Wrapper for carousel items -->
-                                        <div class="carousel-inner">
-                                            <div class="item carousel-item active">
-                                                <div class="img-box"><img src="images/layout_img/user_img.jpg"
-                                                        alt=""></div>
-                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                    iste natus error sit voluptatem accusantium
-                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                    quae..</p>
-                                                <p class="overview"><b>Michael Stuart</b>Seo Founder
-                                                </p>
-                                            </div>
-                                            <div class="item carousel-item">
-                                                <div class="img-box"><img src="images/layout_img/user_img.jpg"
-                                                        alt=""></div>
-                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                    iste natus error sit voluptatem accusantium
-                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                    quae..</p>
-                                                <p class="overview"><b>Michael Stuart</b>Seo Founder
-                                                </p>
-                                            </div>
-                                            <div class="item carousel-item">
-                                                <div class="img-box"><img src="images/layout_img/user_img.jpg"
-                                                        alt=""></div>
-                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                    iste natus error sit voluptatem accusantium
-                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                    quae..</p>
-                                                <p class="overview"><b>Michael Stuart</b>Seo Founder
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <!-- Carousel controls -->
-                                        <a class="carousel-control left carousel-control-prev" href="#testimonial_slider"
-                                            data-slide="prev">
-                                            <i class="fa fa-angle-left"></i>
-                                        </a>
-                                        <a class="carousel-control right carousel-control-next" href="#testimonial_slider"
-                                            data-slide="next">
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-round">
+                    <div class="card-body">
+                        <div class="card-head-row card-tools-still-right">
+                            <div class="card-title">New Customers</div>
+                            <div class="card-tools">
+                                <div class="dropdown">
+                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="card-list py-4">
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="assets/img/jm_denis.jpg" alt="..."
+                                        class="avatar-img rounded-circle" />
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Jimmy Denis</div>
+                                    <div class="status">Graphic Designer</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <span class="avatar-title rounded-circle border border-white">CF</span>
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Chandra Felix</div>
+                                    <div class="status">Sales Promotion</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle" />
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Talha</div>
+                                    <div class="status">Front End Designer</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="assets/img/chadengle.jpg" alt="..."
+                                        class="avatar-img rounded-circle" />
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Chad</div>
+                                    <div class="status">CEO Zeleaf</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <span class="avatar-title rounded-circle border border-white bg-primary">H</span>
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Hizrian</div>
+                                    <div class="status">Web Designer</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <span class="avatar-title rounded-circle border border-white bg-secondary">F</span>
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">Farrah</div>
+                                    <div class="status">Marketing</div>
+                                </div>
+                                <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end testimonial -->
-            <!-- progress bar -->
-            <div class="col-md-6">
-                <div class="white_shd full margin_bottom_30">
-                    <div class="full graph_head">
-                        <div class="heading1 margin_0">
-                            <h2>Progress Bar</h2>
-                        </div>
-                    </div>
-                    <div class="full progress_bar_inner">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="progress_bar">
-                                    <!-- Skill Bars -->
-                                    <span class="skill" style="width:73%;">Facebook <span
-                                            class="info_valume">73%</span></span>
-                                    <div class="progress skill-bar ">
-                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                            role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 73%;">
-                                        </div>
-                                    </div>
-                                    <span class="skill" style="width:62%;">Twitter <span
-                                            class="info_valume">62%</span></span>
-                                    <div class="progress skill-bar">
-                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                            role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 62%;">
-                                        </div>
-                                    </div>
-                                    <span class="skill" style="width:54%;">Instagram <span
-                                            class="info_valume">54%</span></span>
-                                    <div class="progress skill-bar">
-                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                            role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 54%;">
-                                        </div>
-                                    </div>
-                                    <span class="skill" style="width:82%;">Google plus <span
-                                            class="info_valume">82%</span></span>
-                                    <div class="progress skill-bar">
-                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                            role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 82%;">
-                                        </div>
-                                    </div>
-                                    <span class="skill" style="width:48%;">Other <span
-                                            class="info_valume">48%</span></span>
-                                    <div class="progress skill-bar">
-                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                            role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 48%;">
-                                        </div>
+            <div class="col-md-8">
+                <div class="card card-round">
+                    <div class="card-header">
+                        <div class="card-head-row card-tools-still-right">
+                            <div class="card-title">Transaction History</div>
+                            <div class="card-tools">
+                                <div class="dropdown">
+                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- end progress bar -->
-        </div>
-        <div class="row column4 graph">
-            <div class="col-md-6">
-                <div class="dash_blog">
-                    <div class="dash_blog_inner">
-                        <div class="dash_head">
-                            <h3><span><i class="fa fa-calendar"></i> 6 July 2018</span><span class="plus_green_bt"><a
-                                        href="#">+</a></span></h3>
-                        </div>
-                        <div class="list_cont">
-                            <p>Today Tasks for Ronney Jack</p>
-                        </div>
-                        <div class="task_list_main">
-                            <ul class="task_list">
-                                <li><a href="#">Meeting about plan for Admin Template
-                                        2018</a><br><strong>10:00 AM</strong></li>
-                                <li><a href="#">Create new task for
-                                        Dashboard</a><br><strong>10:00 AM</strong></li>
-                                <li><a href="#">Meeting about plan for Admin Template
-                                        2018</a><br><strong>11:00 AM</strong></li>
-                                <li><a href="#">Create new task for
-                                        Dashboard</a><br><strong>10:00 AM</strong></li>
-                                <li><a href="#">Meeting about plan for Admin Template
-                                        2018</a><br><strong>02:00 PM</strong></li>
-                            </ul>
-                        </div>
-                        <div class="read_more">
-                            <div class="center"><a class="main_bt read_bt" href="#">Read
-                                    More</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="dash_blog">
-                    <div class="dash_blog_inner">
-                        <div class="dash_head">
-                            <h3><span><i class="fa fa-comments-o"></i> Updates</span><span class="plus_green_bt"><a
-                                        href="#">+</a></span></h3>
-                        </div>
-                        <div class="list_cont">
-                            <p>User confirmation</p>
-                        </div>
-                        <div class="msg_list_main">
-                            <ul class="msg_list">
-                                <li>
-                                    <span><img src="images/layout_img/msg2.png" class="img-responsive"
-                                            alt="#" /></span>
-                                    <span>
-                                        <span class="name_user">John Smith</span>
-                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                        <span class="time_ago">12 min ago</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span><img src="images/layout_img/msg3.png" class="img-responsive"
-                                            alt="#" /></span>
-                                    <span>
-                                        <span class="name_user">John Smith</span>
-                                        <span class="msg_user">On the other hand, we denounce.</span>
-                                        <span class="time_ago">12 min ago</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span><img src="images/layout_img/msg2.png" class="img-responsive"
-                                            alt="#" /></span>
-                                    <span>
-                                        <span class="name_user">John Smith</span>
-                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                        <span class="time_ago">12 min ago</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span><img src="images/layout_img/msg3.png" class="img-responsive"
-                                            alt="#" /></span>
-                                    <span>
-                                        <span class="name_user">John Smith</span>
-                                        <span class="msg_user">On the other hand, we denounce.</span>
-                                        <span class="time_ago">12 min ago</span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="read_more">
-                            <div class="center"><a class="main_bt read_bt" href="#">Read
-                                    More</a></div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <!-- Projects table -->
+                            <table class="table align-items-center mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Payment Number</th>
+                                        <th scope="col" class="text-end">Date & Time</th>
+                                        <th scope="col" class="text-end">Amount</th>
+                                        <th scope="col" class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                            Payment from #10231
+                                        </th>
+                                        <td class="text-end">Mar 19, 2020, 2.45pm</td>
+                                        <td class="text-end">$250.00</td>
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Completed</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

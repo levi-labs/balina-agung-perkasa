@@ -2,89 +2,211 @@
 <html lang="en">
 
 <head>
-    <!-- basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>Pluto - Responsive Bootstrap Admin Panel Templates</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- site icon -->
-    <link rel="icon" href="{{ asset('/assets/images/fevicon.png') }}" type="image/png" />
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css') }}" />
-    <!-- site css -->
-    <link rel="stylesheet" href="{{ asset('/assets/style.css') }}" />
-    <!-- responsive css -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/responsive.css') }}" />
-    <!-- color css -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/colors.css') }}" />
-    <!-- select bootstrap -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap-select.css') }}" />
-    <!-- scrollbar css -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/perfect-scrollbar.css') }}" />
-    <!-- custom css -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/custom.css') }}" />
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Public Sans:300,400,500,600,700"]
+            },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["assets/css/fonts.min.css"],
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css" />
 </head>
 
-<body class="dashboard dashboard_1">
-    <div class="full_container">
-        <div class="inner_container">
-            <!-- Sidebar  -->
-            @include('layout.sidebar')
-            <!-- end sidebar -->
-            <!-- right content -->
-            <div id="content">
-                <!-- topbar -->
-                @include('layout.navbar')
-                <!-- end topbar -->
-                <!-- dashboard inner -->
-                <div class="midde_cont">
-                    @yield('content')
-                    <!-- footer -->
-                    <div class="container-fluid">
-                        <div class="footer">
-                            <p>Copyright © 2018 Designed by html.design. All rights reserved.<br><br>
-                                Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
-                            </p>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        @include('layout.sidebar')
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            @include('layout.navbar')
+
+            <div class="container">
+                @yield('content')
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid d-flex justify-content-between">
+                    <nav class="pull-left">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://www.themekita.com">
+                                    ThemeKita
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Help </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Licenses </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright">
+                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                        <a href="http://www.themekita.com">ThemeKita</a>
+                    </div>
+                    <div>
+                        Distributed by
+                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Custom template | don't include it in your project! -->
+        <div class="custom-template">
+            <div class="title">Settings</div>
+            <div class="custom-content">
+                <div class="switcher">
+                    <div class="switch-block">
+                        <h4>Logo Header</h4>
+                        <div class="btnSwitch">
+                            <button type="button" class="selected changeLogoHeaderColor" data-color="dark"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+                            <br />
+                            <button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+                            <button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+                        </div>
+                    </div>
+                    <div class="switch-block">
+                        <h4>Navbar Header</h4>
+                        <div class="btnSwitch">
+                            <button type="button" class="changeTopBarColor" data-color="dark"></button>
+                            <button type="button" class="changeTopBarColor" data-color="blue"></button>
+                            <button type="button" class="changeTopBarColor" data-color="purple"></button>
+                            <button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+                            <button type="button" class="changeTopBarColor" data-color="green"></button>
+                            <button type="button" class="changeTopBarColor" data-color="orange"></button>
+                            <button type="button" class="changeTopBarColor" data-color="red"></button>
+                            <button type="button" class="selected changeTopBarColor" data-color="white"></button>
+                            <br />
+                            <button type="button" class="changeTopBarColor" data-color="dark2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="blue2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="purple2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="green2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="orange2"></button>
+                            <button type="button" class="changeTopBarColor" data-color="red2"></button>
+                        </div>
+                    </div>
+                    <div class="switch-block">
+                        <h4>Sidebar</h4>
+                        <div class="btnSwitch">
+                            <button type="button" class="changeSideBarColor" data-color="white"></button>
+                            <button type="button" class="selected changeSideBarColor" data-color="dark"></button>
+                            <button type="button" class="changeSideBarColor" data-color="dark2"></button>
                         </div>
                     </div>
                 </div>
-                <!-- end dashboard inner -->
+            </div>
+            <div class="custom-toggle">
+                <i class="icon-settings"></i>
             </div>
         </div>
+        <!-- End Custom template -->
     </div>
-    <!-- jQuery -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <!-- wow animation -->
-    <script src="{{ asset('assets/js/animate.js') }}"></script>
-    <!-- select country -->
-    <script src="{{ asset('assets/js/bootstrap-select.js') }}"></script>
-    <!-- owl carousel -->
-    <script src="{{ asset('assets/js/owl.carousel.js') }}"></script>
-    <!-- chart js -->
-    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/js/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/utils.js') }}"></script>
-    <script src="{{ asset('assets/js/analyser.js{') }}"></script>
-    <!-- nice scrollbar -->
-    <script src="{{ asset('assets/js/perfect-scrollbar.min.js') }}"></script>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="assets/js/setting-demo.js"></script>
+    <script src="assets/js/demo.js"></script>
     <script>
-        var ps = new PerfectScrollbar('#sidebar');
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
     </script>
-    <!-- custom js -->
-    <script src="{{ asset('assets/js/chart_custom_style1.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 
 </html>
