@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTrainingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::controller(DataTrainingController::class)->prefix('data-training')->group(function () {
+    Route::get('/', 'index')->name('data-training');
+    Route::post('/import', 'import')->name('data-training-import');
+    Route::get('/proses', 'proses')->name('data-training-proses');
+    Route::get('/create', 'create')->name('data-training-create');
+    Route::post('/store', 'store')->name('data-training-store');
+    Route::get('/edit/{id}', 'edit')->name('data-training-edit');
+    Route::put('/update/{id}', 'update')->name('data-training-update');
+    Route::delete('/destroy/{id}', 'destroy')->name('data-training-destroy');
+});
