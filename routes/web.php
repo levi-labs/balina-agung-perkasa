@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\PrediksiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,4 +43,13 @@ Route::controller(PrediksiController::class)->prefix('prediksi')->group(function
     Route::get('/edit/{prediksi}', 'edit')->name('prediksi-edit');
     Route::put('/update/{prediksi}', 'update')->name('prediksi-update');
     Route::delete('/destroy/{prediksi}', 'destroy')->name('prediksi-destroy');
+});
+
+Route::controller(UserController::class)->prefix('user')->group(function () {
+    Route::get('/', 'index')->name('user');
+    Route::get('/create', 'create')->name('user-create');
+    Route::post('/store', 'store')->name('user-store');
+    Route::get('/edit/{user}', 'edit')->name('user-edit');
+    Route::put('/update/{user}', 'update')->name('user-update');
+    Route::delete('/destroy/{user}', 'destroy')->name('user-destroy');
 });
