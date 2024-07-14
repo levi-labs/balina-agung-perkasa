@@ -2,10 +2,13 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
-                <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
-                    height="20" />
+            <a href="{{ route('dashboard') }}" class="logo mt-2">
+                <img src="{{ asset('assets/logo.png') }}" alt="navbar brand" class="navbar-brand" width=25%" />
+                <div class="text-center">
+                    <small class="text-sm text-white">Belina Agung Perkasa</small>
+                </div>
             </a>
+
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
                     <i class="gg-menu-right"></i>
@@ -18,6 +21,7 @@
                 <i class="gg-more-vertical-alt"></i>
             </button>
         </div>
+
         <!-- End Logo Header -->
     </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -47,18 +51,22 @@
                         <span class="sub-item">Data Prediksi</span>
                     </a>
                 </li>
-                <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section">Daftar Users</h4>
-                </li>
-                <li class="nav-item {{ request()->routeIs('user') ? 'active' : '' }}">
-                    <a href="{{ route('user') }}">
-                        <i class="fas fa-users"></i>
-                        <span class="sub-item">Users</span>
-                    </a>
-                </li>
+
+                @if (Auth::user()->level == 'superadmin')
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">Daftar Users</h4>
+                    </li>
+                    <li class="nav-item {{ request()->routeIs('user') ? 'active' : '' }}">
+                        <a href="{{ route('user') }}">
+                            <i class="fas fa-users"></i>
+                            <span class="sub-item">Users</span>
+                        </a>
+                    </li>
+                @endif
+
             </ul>
         </div>
     </div>

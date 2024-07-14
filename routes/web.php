@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\PrediksiController;
@@ -18,38 +19,49 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout.main');
+    if (auth()->check()) {
+        return redirect('/dashboard');
+    }
+    return view('auth.login');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login-post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::controller(DataTrainingController::class)->prefix('data-training')->group(function () {
-    Route::get('/', 'index')->name('data-training');
-    Route::post('/import', 'import')->name('data-training-import');
-    Route::get('/proses', 'showProses')->name('data-training-proses');
-    Route::get('/create', 'create')->name('data-training-create');
-    Route::post('/store', 'store')->name('data-training-store');
-    Route::get('/edit/{training}', 'edit')->name('data-training-edit');
-    Route::put('/update/{training}', 'update')->name('data-training-update');
-    Route::delete('/destroy/{training}', 'destroy')->name('data-training-destroy');
-});
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::controller(PrediksiController::class)->prefix('prediksi')->group(function () {
-    Route::get('/', 'index')->name('prediksi');
-    Route::post('/import', 'import')->name('prediksi-import');
-    Route::get('/proses', 'proses')->name('prediksi-proses');
-    Route::get('/create', 'create')->name('prediksi-create');
-    Route::post('/store', 'store')->name('prediksi-store');
-    Route::get('/edit/{prediksi}', 'edit')->name('prediksi-edit');
-    Route::put('/update/{prediksi}', 'update')->name('prediksi-update');
-    Route::delete('/destroy/{prediksi}', 'destroy')->name('prediksi-destroy');
-});
+    Route::controller(DataTrainingController::class)->prefix('data-training')->group(function () {
+        Route::get('/', 'index')->name('data-training');
+        Route::post('/import', 'import')->name('data-training-import');
+        Route::get('/proses', 'showProses')->name('data-training-proses');
+        Route::get('/create', 'create')->name('data-training-create');
+        Route::post('/store', 'store')->name('data-training-store');
+        Route::get('/edit/{training}', 'edit')->name('data-training-edit');
+        Route::put('/update/{training}', 'update')->name('data-training-update');
+        Route::delete('/destroy/{training}', 'destroy')->name('data-training-destroy');
+    });
 
-Route::controller(UserController::class)->prefix('user')->group(function () {
-    Route::get('/', 'index')->name('user');
-    Route::get('/create', 'create')->name('user-create');
-    Route::post('/store', 'store')->name('user-store');
-    Route::get('/edit/{user}', 'edit')->name('user-edit');
-    Route::put('/update/{user}', 'update')->name('user-update');
-    Route::delete('/destroy/{user}', 'destroy')->name('user-destroy');
+    Route::controller(PrediksiController::class)->prefix('prediksi')->group(function () {
+        Route::get('/', 'index')->name('prediksi');
+        Route::post('/import', 'import')->name('prediksi-import');
+        Route::get('/proses', 'proses')->name('prediksi-proses');
+        Route::get('/create', 'create')->name('prediksi-create');
+        Route::post('/store', 'store')->name('prediksi-store');
+        Route::get('/edit/{prediksi}', 'edit')->name('prediksi-edit');
+        Route::put('/update/{prediksi}', 'update')->name('prediksi-update');
+        Route::delete('/destroy/{prediksi}', 'destroy')->name('prediksi-destroy');
+    });
+
+    Route::controller(UserController::class)->prefix('user')->group(function () {
+        Route::get('/', 'index')->name('user');
+        Route::get('/create', 'create')->name('user-create');
+        Route::post('/store', 'store')->name('user-store');
+        Route::get('/edit/{user}', 'edit')->name('user-edit');
+        Route::put('/update/{user}', 'update')->name('user-update');
+        Route::delete('/destroy/{user}', 'destroy')->name('user-destroy');
+    });
+    Route::get('/ubah-password', [AuthController::class, 'ubahPassword'])->name('ubah-password');
+    Route::post('/update-password', [AuthController::class, 'updatePassword'])->name('update-password');
 });

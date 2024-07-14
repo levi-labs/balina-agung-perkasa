@@ -9,8 +9,19 @@
 
         </div>
         <div class="row">
+            @if (session()->has('login_success'))
+                <div class="alert alert-success bg-success">
+                    <span class="text-white">{{ session('login_success') }}</span>
+                </div>
+            @endif
+            @if (session()->has('success'))
+                <div class="alert alert-success bg-success">
+                    <span class="text-white">{{ session('success') }}</span>
+                </div>
+            @endif
             <div class="col-md-4">
                 <div class="card card-stats card-round">
+
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-icon">
