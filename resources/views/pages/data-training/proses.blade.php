@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Probability Ukuran</div>
@@ -129,7 +129,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Probability Stok</div>
