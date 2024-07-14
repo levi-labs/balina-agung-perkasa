@@ -193,9 +193,9 @@
                                         <td>{{ $item['stok_produk'] }}</td>
                                         <td>{{ $item['output'] }}</td>
                                         <td>{{ $item['prediksi'] }}</td>
-                                        <td>{{ $item['laku'] }}</td>
-                                        <td>{{ $item['kurang laku'] }}</td>
-                                        <td>{{ $item['tidak laku'] }}</td>
+                                        <td>{{ number_format($item['laku'], 4) }}</td>
+                                        <td>{{ number_format($item['kurang laku'], 4) }}</td>
+                                        <td>{{ number_format($item['tidak laku'], 4) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
