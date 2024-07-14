@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Data Training</h4>
+            <h4 class="page-title">Halaman Data Training</h4>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +23,7 @@
                         <div class="row justify-content-end">
                             <div class="col-md-8">
                                 <a href="{{ route('data-training-create') }}" class="btn btn-secondary mt-2">Tambah</a>
-                                <a href="{{ route('data-training-proses') }}" class="btn btn-secondary mt-2">Training</a>
+                                <a href="{{ route('data-training-proses') }}" class="btn btn-info mt-2">Training</a>
                             </div>
                             <div class="col-md-4">
                                 <form action="{{ route('data-training-import') }}" method="post"
@@ -63,8 +63,14 @@
                                         <td>
                                             <a href="{{ route('data-training-edit', $item->id) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="{{ route('data-training-destroy', $item->id) }}"
-                                                class="btn btn-danger btn-sm">Delete</a>
+                                            <form class="d-inline" action="{{ route('data-training-destroy', $item->id) }}"
+                                                method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit"
+                                                    class="btn btn-danger btn-sm d-inline">Delete</button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach

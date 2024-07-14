@@ -315,7 +315,9 @@ class DataTrainingController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Data Training';
+
+        return view('pages.data-training.create', compact('title'));
     }
 
     /**
@@ -323,7 +325,28 @@ class DataTrainingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama_produk' => 'required',
+            'ukuran' => 'required',
+            'stok_produk' => 'required',
+            'output' => 'required',
+        ]);
+
+        try {
+
+            DB::table('data_training')->insert([
+                'id' => $request->id,
+                'nama_produk' => $request->nama_produk,
+                'ukuran' => $request->ukuran,
+                'stok_produk' => $request->stok_produk,
+                'output' => $request->output,
+
+            ]);
+
+            return redirect()->route('data-training')->with('success', 'Data Training berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -339,7 +362,9 @@ class DataTrainingController extends Controller
      */
     public function edit(Training $training)
     {
-        //
+        $title = 'Edit Data Training';
+
+        return view('pages.data-training.edit', compact('title', 'training'));
     }
 
     /**
@@ -347,7 +372,24 @@ class DataTrainingController extends Controller
      */
     public function update(Request $request, Training $training)
     {
-        //
+        $this->validate($request, [
+            'nama_produk' => 'required',
+            'ukuran' => 'required',
+            'stok_produk' => 'required',
+            'output' => 'required',
+        ]);
+
+        try {
+            DB::table('data_training')->where('id', $training->id)->update([
+                'nama_produk' => $request->nama_produk,
+                'ukuran' => $request->ukuran,
+                'stok_produk' => $request->stok_produk,
+                'output' => $request->output,
+            ]);
+            return redirect()->route('data-training')->with('success', 'Data Training berhasil diupdate');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -355,6 +397,11 @@ class DataTrainingController extends Controller
      */
     public function destroy(Training $training)
     {
-        //
+        try {
+            DB::table('data_training')->where('id', $training->id)->delete();
+            return redirect()->route('data-training')->with('success', 'Data Training berhasil dihapus');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

@@ -28,9 +28,9 @@ Route::controller(DataTrainingController::class)->prefix('data-training')->group
     Route::get('/proses', 'showProses')->name('data-training-proses');
     Route::get('/create', 'create')->name('data-training-create');
     Route::post('/store', 'store')->name('data-training-store');
-    Route::get('/edit/{id}', 'edit')->name('data-training-edit');
-    Route::put('/update/{id}', 'update')->name('data-training-update');
-    Route::delete('/destroy/{id}', 'destroy')->name('data-training-destroy');
+    Route::get('/edit/{training}', 'edit')->name('data-training-edit');
+    Route::put('/update/{training}', 'update')->name('data-training-update');
+    Route::delete('/destroy/{training}', 'destroy')->name('data-training-destroy');
 });
 
 Route::controller(PrediksiController::class)->prefix('prediksi')->group(function () {
