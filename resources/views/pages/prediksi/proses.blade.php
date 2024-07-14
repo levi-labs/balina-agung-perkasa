@@ -98,7 +98,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Probability Ukuran</div>
-
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
@@ -112,9 +111,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @php
-                                    dd($ukuran_prior);
-                                @endphp --}}
                                 @foreach ($result[0][2] as $item)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
@@ -173,11 +169,8 @@
                         <div class="card-title">Hasil Prediksi</div>
                     </div>
                     <div class="card-body">
-                        {{-- @php
-                            dd($result);
-                        @endphp --}}
                         <h5>Hasil Akurasi : {{ $result[2] . ' %' }}</h5>
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover table-bordered table-responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -136,7 +136,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Probability Stok</div>
-
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
