@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Halaman Tambah Data Prediksi</h4>
+            <h4 class="page-title">Halaman Edit Data User</h4>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
