@@ -13,14 +13,14 @@ class Training extends Model
     protected $guarded = ['id'];
     protected $table = 'data_training';
 
-    public function nama_produk(): Attribute
+    public function namaProduk(): Attribute
     {
         return new Attribute(
             get: fn ($value) => strtolower($value),
             set: fn ($value) => strtolower($value),
         );
     }
-    public function stok_produk(): Attribute
+    public function stokProduk(): Attribute
     {
         return new Attribute(
             get: fn ($value) => strtolower($value),

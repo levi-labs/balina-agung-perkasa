@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="page-inner">
-        <div class="page-header"></div>
+        <div class="page-header">
+            <h4 class="page-title">Halaman Tambah Data Prediksi</h4>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -20,11 +22,11 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('data-training-store') }}" method="post">
+                        <form action="{{ route('prediksi-store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="nama_produk">Nama Produk</label>
-                                <input type="email" class="form-control" id="nama_produk" name="nama_produk">
+                                <input type="text" class="form-control" id="nama_produk" name="nama_produk">
                                 @error('nama_produk')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -51,7 +53,7 @@
                             <div class="form-group">
                                 <label for="output">Output</label>
                                 <select class="form-select" id="output" name="output">
-                                    <option selected disabled>Pilih Stok</option>
+                                    <option selected disabled>Pilih Output</option>
                                     <option value="laku">Laku</option>
                                     <option value="kurang laku">Kurang Laku</option>
                                     <option value="tidak laku">Tidak Laku</option>

@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="page-inner">
-        <div class="page-header"></div>
+        <div class="page-header">
+            <h4 class="page-title">Halaman Tambah Data Training</h4>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">

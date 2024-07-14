@@ -39,7 +39,7 @@ Route::controller(PrediksiController::class)->prefix('prediksi')->group(function
     Route::get('/proses', 'proses')->name('prediksi-proses');
     Route::get('/create', 'create')->name('prediksi-create');
     Route::post('/store', 'store')->name('prediksi-store');
-    Route::get('/edit/{id}', 'edit')->name('prediksi-edit');
-    Route::put('/update/{id}', 'update')->name('prediksi-update');
-    Route::delete('/destroy/{id}', 'destroy')->name('prediksi-destroy');
+    Route::get('/edit/{prediksi}', 'edit')->name('prediksi-edit');
+    Route::put('/update/{prediksi}', 'update')->name('prediksi-update');
+    Route::delete('/destroy/{prediksi}', 'destroy')->name('prediksi-destroy');
 });

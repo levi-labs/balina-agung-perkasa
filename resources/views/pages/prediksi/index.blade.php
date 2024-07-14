@@ -31,7 +31,11 @@
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="exampleFormControlFile1"
                                             name="file">
+
                                         <button type="submit" class="btn btn-secondary btn-sm d-inline">import</button>
+                                        @error('file')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </form>
                             </div>
@@ -58,10 +62,15 @@
                                         <td>{{ $item->stok_produk }}</td>
                                         <td>{{ $item->output }}</td>
                                         <td>
-                                            <a href="{{ route('data-training-edit', $item->id) }}"
+                                            <a href="{{ route('prediksi-edit', $item->id) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="{{ route('data-training-destroy', $item->id) }}"
-                                                class="btn btn-danger btn-sm">Delete</a>
+                                            <form action="{{ route('prediksi-destroy', $item->id) }}" method="post"
+                                                class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach

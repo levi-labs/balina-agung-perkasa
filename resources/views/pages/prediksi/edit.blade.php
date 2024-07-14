@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Halaman Edit Data Training</h4>
+            <h4 class="page-title">Halaman Edit Data Prediksi</h4>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -22,13 +22,13 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('data-training-update', $training->id) }}" method="post">
+                        <form action="{{ route('prediksi-update', $prediksi->id) }}" method="post">
                             @method('PUT')
                             @csrf
                             <div class="form-group">
                                 <label for="nama_produk">Nama Produk</label>
                                 <input type="text" class="form-control" id="nama_produk" name="nama_produk"
-                                    value="{{ $training->nama_produk }}">
+                                    value="{{ $prediksi->nama_produk }}">
                                 @error('nama_produk')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <label for="ukuran">Ukuran</label>
                                 <input type="number" class="form-control" id="ukuran" name="ukuran"
-                                    value="{{ $training->ukuran }}">
+                                    value="{{ $prediksi->ukuran }}">
                                 @error('ukuran')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -45,11 +45,11 @@
                                 <label for="stok_produk">Stok Produk</label>
                                 <select class="form-select" id="stok_produk" name="stok_produk">
                                     <option selected disabled>Pilih Stok</option>
-                                    <option {{ $training->stok_produk == 'tinggi' ? 'selected' : '' }} value="tinggi">Tinggi
+                                    <option {{ $prediksi->stok_produk == 'tinggi' ? 'selected' : '' }} value="tinggi">Tinggi
                                     </option>
-                                    <option {{ $training->stok_produk == 'normal' ? 'selected' : '' }} value="normal">Normal
+                                    <option {{ $prediksi->stok_produk == 'normal' ? 'selected' : '' }} value="normal">Normal
                                     </option>
-                                    <option {{ $training->stok_produk == 'rendah' ? 'selected' : '' }} value="rendah">
+                                    <option {{ $prediksi->stok_produk == 'rendah' ? 'selected' : '' }} value="rendah">
                                         Rendah</option>
                                 </select>
                                 @error('stok_produk')
@@ -59,12 +59,12 @@
                             <div class="form-group">
                                 <label for="output">Output</label>
                                 <select class="form-select" id="output" name="output">
-                                    <option selected disabled>Pilih Stok</option>
-                                    <option {{ $training->output == 'laku' ? 'selected' : '' }} value="laku">Laku
+                                    <option selected disabled>Pilih Output</option>
+                                    <option {{ $prediksi->output == 'laku' ? 'selected' : '' }} value="laku">Laku
                                     </option>
-                                    <option {{ $training->output == 'kurang laku' ? 'selected' : '' }} value="kurang laku">
+                                    <option {{ $prediksi->output == 'kurang laku' ? 'selected' : '' }} value="kurang laku">
                                         Kurang Laku</option>
-                                    <option {{ $training->output == 'tidak laku' ? 'selected' : '' }} value="tidak laku">
+                                    <option {{ $prediksi->output == 'tidak laku' ? 'selected' : '' }} value="tidak laku">
                                         Tidak Laku</option>
                                 </select>
                                 @error('output')

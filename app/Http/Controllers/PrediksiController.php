@@ -165,7 +165,9 @@ class PrediksiController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Form Data Prediksi';
+
+        return view('pages.prediksi.create', compact('title'));
     }
 
     /**
@@ -173,7 +175,27 @@ class PrediksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama_produk' => 'required',
+            'ukuran' => 'required',
+            'stok_produk' => 'required',
+            'output' => 'required',
+        ]);
+
+        try {
+
+            DB::table('prediksi')->insert([
+                'id' => $request->id,
+                'nama_produk' => $request->nama_produk,
+                'ukuran' => $request->ukuran,
+                'stok_produk' => $request->stok_produk,
+                'output' => $request->output,
+            ]);
+
+            return redirect()->route('prediksi')->with('success', 'Data Prediksi berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -189,7 +211,8 @@ class PrediksiController extends Controller
      */
     public function edit(Prediksi $prediksi)
     {
-        //
+        $title = 'Form Edit Data Prediksi';
+        return view('pages.prediksi.edit', compact('prediksi', 'title'));
     }
 
     /**
@@ -197,7 +220,26 @@ class PrediksiController extends Controller
      */
     public function update(Request $request, Prediksi $prediksi)
     {
-        //
+        $this->validate($request, [
+            'nama_produk' => 'required',
+            'ukuran' => 'required',
+            'stok_produk' => 'required',
+            'output' => 'required',
+        ]);
+        try {
+
+            DB::table('prediksi')->where('id', $prediksi->id)->update([
+                'nama_produk' => $request->nama_produk,
+                'ukuran' => $request->ukuran,
+                'stok_produk' => $request->stok_produk,
+                'output' => $request->output,
+            ]);
+
+            return redirect()->route('prediksi')->with('success', 'Data Prediksi berhasil diupdate');
+        } catch (\Throwable $th) {
+
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -205,6 +247,11 @@ class PrediksiController extends Controller
      */
     public function destroy(Prediksi $prediksi)
     {
-        //
+        try {
+            DB::table('prediksi')->where('id', $prediksi->id)->delete();
+            return redirect()->route('prediksi')->with('success', 'Data Prediksi berhasil dihapus');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

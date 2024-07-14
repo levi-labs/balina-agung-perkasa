@@ -315,7 +315,7 @@ class DataTrainingController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah Data Training';
+        $title = 'Form Tambah Data Training';
 
         return view('pages.data-training.create', compact('title'));
     }
@@ -362,7 +362,7 @@ class DataTrainingController extends Controller
      */
     public function edit(Training $training)
     {
-        $title = 'Edit Data Training';
+        $title = 'Form Edit Data Training';
 
         return view('pages.data-training.edit', compact('title', 'training'));
     }
