@@ -11,17 +11,21 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class DataTrainingController extends Controller
 {
     private $trainingData;
-    private $count_laku;
-    private $count_kurang_laku;
-    private $count_tidak_laku;
-    private $p_output_laku;
-    private $p_output_kurang_laku;
-    private $p_output_tidak_laku;
-    private $p_nama_produk;
-    private $p_ukuran;
-    private $p_stok;
-    private $predict_result;
+    public $count_laku;
+    public $count_kurang_laku;
+    public $count_tidak_laku;
+    public $p_output_laku;
+    public $p_output_kurang_laku;
+    public $p_output_tidak_laku;
+    public $p_nama_produk;
+    public $p_ukuran;
+    public $p_stok;
+    public $predict_result;
 
+    // public function __construct()
+    // {
+    //     $this->proses();
+    // }
 
     /**
      * Display a listing of the resource.
@@ -55,39 +59,65 @@ class DataTrainingController extends Controller
         }
     }
 
+    public function showProses()
+    {
+        $title = 'Proses Training';
+        $result = $this->proses();
+
+        // dd($result);
+        return view('pages.data-training.proses', compact(
+            'title',
+            'result'
+        ));
+    }
     public function proses()
     {
-        $data = DB::table('data_training')->get()->toArray();
-        $data_ukuran = DB::table('data_training')
-            ->distinct()
-            ->pluck('ukuran')
-            ->sortDesc()
-            ->values()
-            ->toArray();
+        $title = 'Proses Training';
+        try {
+            $data = DB::table('data_training')->get()->toArray();
+            $data_ukuran = DB::table('data_training')
+                ->distinct()
+                ->pluck('ukuran')
+                ->sortDesc()
+                ->values()
+                ->toArray();
 
-        $data_stok = DB::table('data_training')
-            ->distinct()
-            ->pluck('stok_produk')
-            ->sortDesc()
-            ->values()
-            ->toArray();
+            $data_stok = DB::table('data_training')
+                ->distinct()
+                ->pluck('stok_produk')
+                ->sortDesc()
+                ->values()
+                ->toArray();
 
 
-        $this->trainingData = DB::table('data_training')->count();
-        $this->count_laku = DB::table('data_training')->where('output', 'laku')->count();
-        $this->count_kurang_laku = DB::table('data_training')->where('output', 'kurang laku')->count();
-        $this->count_tidak_laku = DB::table('data_training')->where('output', 'tidak laku')->count();
+            $this->trainingData = DB::table('data_training')->count();
+            $this->count_laku = DB::table('data_training')->where('output', 'laku')->count();
+            $this->count_kurang_laku = DB::table('data_training')->where('output', 'kurang laku')->count();
+            $this->count_tidak_laku = DB::table('data_training')->where('output', 'tidak laku')->count();
 
-        $this->p_output_laku = floor($this->count_laku / $this->trainingData * 100);
-        $this->p_output_kurang_laku = floor($this->count_kurang_laku / $this->trainingData * 100);
-        $this->p_output_tidak_laku = floor($this->count_tidak_laku / $this->trainingData * 100);
-        $produk_prior = $this->getPiorProduk($data);;
-        $ukuran_prior = $this->getPiorUkuran($data_ukuran);
-        $stok_prior   = $this->getPiorStok($data_stok);
+            $this->p_output_laku = $this->count_laku / $this->trainingData;
+            $this->p_output_kurang_laku = $this->count_kurang_laku / $this->trainingData;
+            $this->p_output_tidak_laku = $this->count_tidak_laku / $this->trainingData;
 
-        $predict = $this->getPredict();
+            $produk_prior = $this->getPiorProduk($data);;
+            $ukuran_prior = $this->getPiorUkuran($data_ukuran);
+            $stok_prior   = $this->getPiorStok($data_stok);
 
-        dd($predict);
+            $predict = $this->getPredict();
+            // dd($data, $produk_prior, $ukuran_prior, $stok_prior, $predict);
+
+            return [$data, $produk_prior, $ukuran_prior, $stok_prior];
+            // return view('pages.data-training.proses', compact(
+            //     'title',
+            //     'data',
+            //     'produk_prior',
+            //     'ukuran_prior',
+            //     'stok_prior',
+            //     'predict'
+            // ));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     public function getPiorProduk($data)
@@ -101,9 +131,9 @@ class DataTrainingController extends Controller
             $kurang_laku = DB::table('data_training')->where('output', 'kurang laku')->where('nama_produk', $value->nama_produk)->count();
 
             $tidak_laku = DB::table('data_training')->where('output', 'tidak laku')->where('nama_produk', $value->nama_produk)->count();
-            $this->p_nama_produk[$key]['laku'] = ceil(($laku / $this->count_laku) * 100);
-            $this->p_nama_produk[$key]['kurang laku'] = ceil(($kurang_laku / $this->count_kurang_laku) * 100);
-            $this->p_nama_produk[$key]['tidak laku'] = ceil(($tidak_laku / $this->count_tidak_laku) * 100);
+            $this->p_nama_produk[$key]['laku'] = $laku / $this->count_laku;
+            $this->p_nama_produk[$key]['kurang laku'] = $kurang_laku / $this->count_kurang_laku;
+            $this->p_nama_produk[$key]['tidak laku'] = $tidak_laku / $this->count_tidak_laku;
         }
 
         // dd($this->p_nama_produk, $percent);
@@ -124,9 +154,9 @@ class DataTrainingController extends Controller
 
             $tidak_laku = DB::table('data_training')->where('output', 'tidak laku')->where('ukuran', $value)->count();
 
-            $this->p_ukuran[$keys]['laku'] = ceil($laku / $this->count_laku * 100);
-            $this->p_ukuran[$keys]['kurang laku'] = ceil($kurang_laku / $this->count_kurang_laku * 100);
-            $this->p_ukuran[$keys]['tidak laku'] = ceil($tidak_laku / $this->count_tidak_laku * 100);
+            $this->p_ukuran[$keys]['laku'] = $laku / $this->count_laku;
+            $this->p_ukuran[$keys]['kurang laku'] = $kurang_laku / $this->count_kurang_laku;
+            $this->p_ukuran[$keys]['tidak laku'] = $tidak_laku / $this->count_tidak_laku;
         }
 
         return $this->p_ukuran;
@@ -145,9 +175,9 @@ class DataTrainingController extends Controller
 
             $tidak_laku = DB::table('data_training')->where('output', 'tidak laku')->where('stok_produk', $value)->count();
 
-            $this->p_stok[$key]['laku'] = ceil($laku / $this->count_laku * 100);
-            $this->p_stok[$key]['kurang laku'] = ceil($kurang_laku / $this->count_kurang_laku * 100);
-            $this->p_stok[$key]['tidak laku'] = ceil($tidak_laku / $this->count_tidak_laku * 100);
+            $this->p_stok[$key]['laku'] = $laku / $this->count_laku;
+            $this->p_stok[$key]['kurang laku'] = $kurang_laku / $this->count_kurang_laku;
+            $this->p_stok[$key]['tidak laku'] = $tidak_laku / $this->count_tidak_laku;
         }
 
         return $this->p_stok;
@@ -190,30 +220,93 @@ class DataTrainingController extends Controller
             $reset_produk = reset($filter_produk);
             $reset_ukuran = reset($filter_ukuran);
             $reset_stok = reset($filter_stok);
+
             $produk[$key]['nama'] = $reset_produk;
             $produk[$key]['ukuran'] = $reset_ukuran;
             $produk[$key]['stok'] = $reset_stok;
             $produk[$key]['probabilitas'] = $value['output'] === 'laku' ? $this->p_output_laku : ($value['output'] === 'kurang laku' ? $this->p_output_kurang_laku : $this->p_output_tidak_laku);
 
-            $this->predict_result[$key]['laku'] = floor($reset_produk['laku'] * $reset_ukuran['laku'] * $reset_stok['laku'] * $this->p_output_laku);
+            $this->predict_result[$key]['laku'] = $reset_produk['laku'] * $reset_ukuran['laku'] * $reset_stok['laku'] * $this->p_output_laku;
+            $this->predict_result[$key]['kurang laku'] = $reset_produk['kurang laku'] * $reset_ukuran['kurang laku'] * $reset_stok['kurang laku'] * $this->p_output_kurang_laku;
+            $this->predict_result[$key]['tidak laku'] = $reset_produk['tidak laku'] * $reset_ukuran['tidak laku'] * $reset_stok['tidak laku'] * $this->p_output_tidak_laku;
 
-            $this->predict_result[$key]['kurang laku'] = floor($reset_produk['kurang laku'] * $reset_ukuran['kurang laku'] * $reset_stok['kurang laku'] * $this->p_output_kurang_laku);
+            if ($this->predict_result[$key]['laku'] > $this->predict_result[$key]['kurang laku'] && $this->predict_result[$key]['laku'] > $this->predict_result[$key]['tidak laku']) {
+                $prediksi_hasil = 'laku';
+            } elseif ($this->predict_result[$key]['kurang laku'] > $this->predict_result[$key]['laku'] && $this->predict_result[$key]['kurang laku'] > $this->predict_result[$key]['tidak laku']) {
+                $prediksi_hasil = 'kurang laku';
+            } elseif ($this->predict_result[$key]['tidak laku'] > $this->predict_result[$key]['laku'] && $this->predict_result[$key]['tidak laku'] > $this->predict_result[$key]['kurang laku']) {
+                $prediksi_hasil = 'tidak laku';
+            } else {
+                $prediksi_hasil = 'tidak diketahui';
+            }
 
-            $this->predict_result[$key]['tidak laku'] = floor($reset_produk['tidak laku'] * $reset_ukuran['tidak laku'] * $reset_stok['tidak laku'] * $this->p_output_tidak_laku);
-
-            // echo $this->predict_result[$key]['laku'] . ' ' . $this->predict_result[$key]['kurang laku'] . ' ' . $this->predict_result[$key]['tidak laku'] . ' ' . $this->p_output_laku . PHP_EOL;
-            // $this->predict[$key]['laku'] = ceil($table_produk[$key]['laku'] * $table_ukuran[$key]['laku'] * $table_stok[$key]['laku'] / 100);
+            $this->predict_result[$key]['prediksi'] = $prediksi_hasil;
         }
 
-        dd(
-            $this->predict_result,
-            $this->p_output_laku,
-            $this->p_output_kurang_laku,
-            $this->p_output_tidak_laku,
-            $produk,
-            $ukuran,
-            $stok
-        );
+        $accuracy = $this->getMatrixConfusion($this->predict_result);
+
+
+
+        return [$this->predict_result, $accuracy];
+    }
+
+    public function getMatrixConfusion($data)
+    {
+        $truthtable = [];
+
+        $lakulaku = 0;
+        $kuranglakulaku = 0;
+        $tidaklakulaku = 0;
+
+        $lakukuranglaku = 0;
+        $kuranglakukuranglaku = 0;
+        $tidaklakukuranglaku = 0;
+
+        $lakutidaklaku = 0;
+        $kuranglakutidaklaku = 0;
+        $tidaklakutidaklaku = 0;
+
+
+        $truePositive = 0;
+        $trueNegative = 0;
+        $falsePositive = 0;
+        $falseNegative = 0;
+
+        foreach ($data as $key => $value) {
+
+
+            if ($value['output'] === 'laku' && $value['prediksi'] === 'laku') {
+                $lakulaku++;
+            } elseif ($value['output'] === 'kurang laku' && $value['prediksi'] === 'laku') {
+                $kuranglakulaku++;
+            } elseif ($value['output'] === 'tidak laku' && $value['prediksi'] === 'laku') {
+                $tidaklakulaku++;
+            } elseif ($value['output'] === 'laku' && $value['prediksi'] === 'kurang laku') {
+                $lakukuranglaku++;
+            } elseif ($value['output'] === 'kurang laku' && $value['prediksi'] === 'kurang laku') {
+                $kuranglakukuranglaku++;
+            } elseif ($value['output'] === 'tidak laku' && $value['prediksi'] === 'kurang laku') {
+                $tidaklakukuranglaku++;
+            } elseif ($value['output'] === 'laku' && $value['prediksi'] === 'tidak laku') {
+                $lakutidaklaku++;
+            } elseif ($value['output'] === 'kurang laku' && $value['prediksi'] === 'tidak laku') {
+                $kuranglakutidaklaku++;
+            } elseif ($value['output'] === 'tidak laku' && $value['prediksi'] === 'tidak laku') {
+                $tidaklakutidaklaku++;
+            }
+        }
+
+        $accuracy = ($lakulaku + $kuranglakukuranglaku + $tidaklakutidaklaku)
+            / ($lakulaku + $kuranglakulaku + $tidaklakulaku + $lakukuranglaku + $kuranglakukuranglaku + $tidaklakukuranglaku + $lakutidaklaku + $kuranglakutidaklaku + $tidaklakutidaklaku) * 100;
+
+
+        return $accuracy;
+    }
+
+    public function numberFormat($number)
+    {
+
+        return number_format($number, 3,);
     }
 
 
